@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Django Rate</title>
+</head>
+<body>
+
+    <style>
+        .checked{
+            color: red;
+        }
+        .btns{
+            border: none;
+            background-color: transparent;
+        }
+        .full{
+          display: flex;
+          margin-top: 150px;
+          align-items: center;
+          justify-content: center;
+        }
+        .rate-form{
+          position: absolute;
+          top: 700px;
+          left: 760px;
+        }
+    </style>
+    
+    {% if rate %}
+    <div class="full">
+        <h1 style="
+           position: absolute;
+           top: 0;
+           margin-right: 50px;
+           font-size: 50px
+        ">Bu home page</h1>
+        <img src="{{ rate.image.url }}" alt="error" width="500" height="500">
+        <a href="{% url 'blog:home' %}" style="margin-left: 50px;"><button>Next</button></a>
+        <form method="POST" class="rate-form" id="{{ rate.id }}">
+            {% csrf_token %}
+            <button type="submit" class="fa fa-star fa-3x btns" id="first"></button>
+            <button type="submit" class="fa fa-star fa-3x btns" id="second"></button>
+            <button type="submit" class="fa fa-star fa-3x btns" id="third"></button>
+            <button type="submit" class="fa fa-star fa-3x btns" id="fourth"></button>
+            <button type="submit" class="fa fa-star fa-3x btns" id="fifth"></button>
+            <br>
+            <div id="confirm-box"></div>
+        </form>
+    </div>
+    {% else %}
+    <h1>Rate qilgani rasm qolmadi</h1>
+    {% endif %}
+  
+
+    <script src="{% static 'main.js' %}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>
